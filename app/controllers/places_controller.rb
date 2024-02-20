@@ -6,6 +6,9 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find_by({"id" => params["id"]})
+    unless @place
+      redirect_to "/places"
+    end
   end
 
   def new
@@ -17,10 +20,6 @@ class PlacesController < ApplicationController
     @place["name"] = params["name"]
     @place.save
     redirect_to "/places"
-  end
-
-  def error
-    render 'not_found', status: :not_found
   end
 
 end
